@@ -47,7 +47,12 @@ app.use((req, res) => {
     res.sendFile(path.join(__dirname, 'public', '404.html'));
 });
 
-// Iniciar servidor
-app.listen(port, () => {
-    console.log(`Servidor corriendo en puerto ${port}`);
-});
+// Iniciar servidor (solo en desarrollo)
+if (process.env.NODE_ENV !== 'production') {
+    app.listen(port, () => {
+        console.log(`Servidor corriendo en puerto ${port}`);
+    });
+}
+
+// Exportar para Vercel
+export default app;
